@@ -1,0 +1,25 @@
+{
+  "@detailedConfigurationReference": "https://github.com/lukeautry/tsoa/blob/master/packages/runtime/src/config.ts",
+  "entryFile": "src/app.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/**/*Controller.ts"],
+  "spec": {
+    "outputDirectory": "src",
+    "securityDefinitions": {
+      "sample": {
+        "scheme": "basic",
+        "type": "http"
+      }
+    },
+    "specVersion": 3
+  },
+  "routes": {
+    "authenticationModule": "src/authn/Authenticator.ts",
+    "basePath": "api/v1",
+    "routesDir": "src/routes",
+    "routesFileName": "index.ts"
+  },
+  "ignore": [
+    "**/node_modules/**"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"ExampleResponse": {
+				"properties": {
+					"result": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {
+			"sample": {
+				"scheme": "basic",
+				"type": "http"
+			}
+		}
+	},
+	"info": {
+		"title": "template-typescript-eslint-tsoa",
+		"version": "0.0.1",
+		"description": "template-typescript-eslint-tsoa",
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/greeting": {
+			"get": {
+				"operationId": "Greeting",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ExampleResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"example": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "who",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

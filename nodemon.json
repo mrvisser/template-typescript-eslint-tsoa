@@ -1,0 +1,5 @@
+{
+  "exec": "NODE_OPTIONS='--trace-deprecation' ts-node src/server.ts | bunyan -o short",
+  "ext": "ts",
+  "watch": ["src"]
+}
