@@ -9,10 +9,12 @@ import { Logger } from '../service/Logger';
 
 @Route('greeting')
 export class ExampleGreetingController {
-  @Inject
-  private readonly logger!: Logger;
-  @Inject
-  private readonly exampleGreetingService!: ExampleGreetingService;
+  constructor(
+    @Inject
+    private readonly logger: Logger,
+    @Inject
+    private readonly exampleGreetingService: ExampleGreetingService,
+  ) {}
 
   @Get()
   @Security('example')

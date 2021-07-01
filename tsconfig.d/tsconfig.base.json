@@ -11,8 +11,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "strict": true,
     "target": "esnext"
   },
-  "exclude": ["./dist/"]
+  "exclude": ["./dist/", "./node_modules/"]
 }

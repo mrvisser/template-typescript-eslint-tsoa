@@ -5,6 +5,8 @@ import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, H
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { ExampleGreetingController } from './../controllers/ExampleGreetingController';
 import { expressAuthentication } from './../authn/Authenticator';
+import { iocContainer } from './ioc';
+import { IocContainer, IocContainerFactory } from '@tsoa/runtime';
 import * as express from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -45,7 +47,12 @@ export function RegisterRoutes(app: express.Router) {
                 return next(err);
             }
 
-            const controller = new ExampleGreetingController();
+            const container: IocContainer = typeof iocContainer === 'function' ? (iocContainer as IocContainerFactory)(request) : iocContainer;
+
+            const controller: any = container.get<ExampleGreetingController>(ExampleGreetingController);
+            if (typeof controller['setStatus'] === 'function') {
+                controller.setStatus(undefined);
+            }
 
 
             const promise = controller.greeting.apply(controller, validatedArgs as any);

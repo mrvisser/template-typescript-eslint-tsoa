@@ -8,7 +8,6 @@ import express, {
   json,
   urlencoded,
 } from 'express';
-import expressBunyanLogger from 'express-bunyan-logger';
 import swaggerUi from 'swagger-ui-express';
 import { ValidateError } from 'tsoa';
 import { Container } from 'typescript-ioc';
@@ -17,6 +16,9 @@ import { v4 as uuidV4 } from 'uuid';
 import { AuthenticationError } from './domain/errors/AuthenticationError';
 import { RegisterRoutes } from './routes';
 import { Logger } from './service/Logger';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const expressBunyanLogger = require('@chaudhryjunaid/express-bunyan-logger');
 
 // Bind config to the injection container so we can do @InjectValue(config.Logger.name)
 Container.bindName('config').to(config.util.loadFileConfigs());
@@ -36,7 +38,14 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 const webLoggerConfig = Logger.resolveBunyanConfig(config.get('logger.web'));
-app.use(expressBunyanLogger(webLoggerConfig));
+app.use(
+  expressBunyanLogger({
+    ...webLoggerConfig,
+    genReqId(req: Request) {
+      return (req as unknown as { id: string }).id;
+    },
+  }),
+);
 app.use(expressBunyanLogger.errorLogger(webLoggerConfig));
 
 app.use('/docs', swaggerUi.serve, async (_req: Request, res: Response) => {
