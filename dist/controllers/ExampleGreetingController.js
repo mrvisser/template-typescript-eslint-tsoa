@@ -21,6 +21,10 @@ const Logger_1 = require("../service/Logger");
 let ExampleGreetingController = class ExampleGreetingController {
     logger;
     exampleGreetingService;
+    constructor(logger, exampleGreetingService) {
+        this.logger = logger;
+        this.exampleGreetingService = exampleGreetingService;
+    }
     async greeting(req, who) {
         const user = await Authenticator_1.ensureAuthenticated(req);
         const result = this.exampleGreetingService.greet(user, who);
@@ -28,14 +32,6 @@ let ExampleGreetingController = class ExampleGreetingController {
         return { result };
     }
 };
-__decorate([
-    typescript_ioc_1.Inject,
-    __metadata("design:type", Logger_1.Logger)
-], ExampleGreetingController.prototype, "logger", void 0);
-__decorate([
-    typescript_ioc_1.Inject,
-    __metadata("design:type", ExampleGreetingService_1.ExampleGreetingService)
-], ExampleGreetingController.prototype, "exampleGreetingService", void 0);
 __decorate([
     tsoa_1.Get(),
     tsoa_1.Security('example'),
@@ -47,7 +43,11 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ExampleGreetingController.prototype, "greeting", null);
 ExampleGreetingController = __decorate([
-    tsoa_1.Route('greeting')
+    tsoa_1.Route('greeting'),
+    __param(0, typescript_ioc_1.Inject),
+    __param(1, typescript_ioc_1.Inject),
+    __metadata("design:paramtypes", [Logger_1.Logger,
+        ExampleGreetingService_1.ExampleGreetingService])
 ], ExampleGreetingController);
 exports.ExampleGreetingController = ExampleGreetingController;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRXhhbXBsZUdyZWV0aW5nQ29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jb250cm9sbGVycy9FeGFtcGxlR3JlZXRpbmdDb250cm9sbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUNBLCtCQUE2RTtBQUM3RSxtREFBd0M7QUFFeEMsMERBQTZEO0FBRTdELDhFQUEyRTtBQUMzRSw4Q0FBMkM7QUFHM0MsSUFBYSx5QkFBeUIsR0FBdEMsTUFBYSx5QkFBeUI7SUFFbkIsTUFBTSxDQUFVO0lBRWhCLHNCQUFzQixDQUEwQjtJQUsxRCxLQUFLLENBQUMsUUFBUSxDQUNSLEdBQVEsRUFDTCxHQUFXO1FBRXpCLE1BQU0sSUFBSSxHQUFHLE1BQU0sbUNBQW1CLENBQUMsR0FBRyxDQUFDLENBQUM7UUFDNUMsTUFBTSxNQUFNLEdBQUcsSUFBSSxDQUFDLHNCQUFzQixDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFDNUQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsa0JBQWtCLEVBQUUsRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLEdBQUcsRUFBRSxDQUFDLENBQUM7UUFDMUQsT0FBTyxFQUFFLE1BQU0sRUFBRSxDQUFDO0lBQ3BCLENBQUM7Q0FDRixDQUFBO0FBaEJDO0lBREMsdUJBQU07OEJBQ21CLGVBQU07eURBQUM7QUFFakM7SUFEQyx1QkFBTTs4QkFDbUMsK0NBQXNCO3lFQUFDO0FBS2pFO0lBSEMsVUFBRyxFQUFFO0lBQ0wsZUFBUSxDQUFDLFNBQVMsQ0FBQztJQUNuQixzQkFBZSxDQUFDLEtBQUssQ0FBQztJQUVwQixXQUFBLGNBQU8sRUFBRSxDQUFBO0lBQ1QsV0FBQSxZQUFLLENBQUMsS0FBSyxDQUFDLENBQUE7Ozs7eURBTWQ7QUFqQlUseUJBQXlCO0lBRHJDLFlBQUssQ0FBQyxVQUFVLENBQUM7R0FDTCx5QkFBeUIsQ0FrQnJDO0FBbEJZLDhEQUF5QiJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRXhhbXBsZUdyZWV0aW5nQ29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jb250cm9sbGVycy9FeGFtcGxlR3JlZXRpbmdDb250cm9sbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUNBLCtCQUE2RTtBQUM3RSxtREFBd0M7QUFFeEMsMERBQTZEO0FBRTdELDhFQUEyRTtBQUMzRSw4Q0FBMkM7QUFHM0MsSUFBYSx5QkFBeUIsR0FBdEMsTUFBYSx5QkFBeUI7SUFHakI7SUFFQTtJQUpuQixZQUVtQixNQUFjLEVBRWQsc0JBQThDO1FBRjlDLFdBQU0sR0FBTixNQUFNLENBQVE7UUFFZCwyQkFBc0IsR0FBdEIsc0JBQXNCLENBQXdCO0lBQzlELENBQUM7SUFLRyxLQUFLLENBQUMsUUFBUSxDQUNSLEdBQVEsRUFDTCxHQUFXO1FBRXpCLE1BQU0sSUFBSSxHQUFHLE1BQU0sbUNBQW1CLENBQUMsR0FBRyxDQUFDLENBQUM7UUFDNUMsTUFBTSxNQUFNLEdBQUcsSUFBSSxDQUFDLHNCQUFzQixDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFDNUQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsa0JBQWtCLEVBQUUsRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLEdBQUcsRUFBRSxDQUFDLENBQUM7UUFDMUQsT0FBTyxFQUFFLE1BQU0sRUFBRSxDQUFDO0lBQ3BCLENBQUM7Q0FDRixDQUFBO0FBVEM7SUFIQyxVQUFHLEVBQUU7SUFDTCxlQUFRLENBQUMsU0FBUyxDQUFDO0lBQ25CLHNCQUFlLENBQUMsS0FBSyxDQUFDO0lBRXBCLFdBQUEsY0FBTyxFQUFFLENBQUE7SUFDVCxXQUFBLFlBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQTs7Ozt5REFNZDtBQW5CVSx5QkFBeUI7SUFEckMsWUFBSyxDQUFDLFVBQVUsQ0FBQztJQUdiLFdBQUEsdUJBQU0sQ0FBQTtJQUVOLFdBQUEsdUJBQU0sQ0FBQTtxQ0FEa0IsZUFBTTtRQUVVLCtDQUFzQjtHQUx0RCx5QkFBeUIsQ0FvQnJDO0FBcEJZLDhEQUF5QiJ9
